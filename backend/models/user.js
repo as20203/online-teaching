@@ -32,6 +32,10 @@ module.exports = sequelize => {
         address:{
             type:Sequelize.STRING,
             allowNull:false
+        },
+        gender:{
+            type:Sequelize.STRING,
+            allowNull:false
         }
     });
 

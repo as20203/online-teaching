@@ -24,6 +24,7 @@ const db = {
 
 //Routes
 const authRoutes = require("./backend/routes/auth")(db);
+const generalRoutes = require("./backend/routes/general")(db);
  
 Object.keys(db).forEach((model) => {
   if ('associate' in db[model]) {
@@ -39,5 +40,6 @@ sequelize.sync({
 })
 
 app.use(authRoutes);
+app.use(generalRoutes);
 
 server.listen(port, () => console.log(`Listening on port ${port}`));

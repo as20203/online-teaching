@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { Menu } from 'semantic-ui-react'
+import { Menu, Segment } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'; 
 
-// import history from '../../history';
 class Navbar extends Component {
   state = { activeItem: 'home'}
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
@@ -11,8 +10,8 @@ class Navbar extends Component {
     const { activeItem } = this.state
 
     return (
-      
-      <Menu inverted>
+    <Segment >
+      <Menu secondary >
         <Menu.Item 
           name='home' 
           as={Link} 
@@ -35,7 +34,7 @@ class Navbar extends Component {
           onClick={this.handleItemClick}
         />
       </Menu>
-     
+    </Segment>  
     
     )
   }

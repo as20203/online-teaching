@@ -19,7 +19,7 @@ class  App extends Component{
   componentDidMount = async()=>{
     const token = localStorage.getItem("Token");
     if(token){
-      const result = await axios.post("/api/verify-token",null,{ headers: {"Authorization" : `Bearer ${token}`} })
+      const result = await axios.post("/api/verify-token")
       if(result.data.status!==200){
         history.push("/");
       } else {
@@ -31,6 +31,7 @@ class  App extends Component{
         history.push("/");
     }
   }
+  
 
 
   render(){
@@ -48,7 +49,7 @@ class  App extends Component{
        <Route exact path="/" component={Landing} />
        <Route path="/login" component={() => <Login setUser={this.setUser} />} />
        <Route path="/signup" component={Signup} />
-       <Route path="/dashboard" component={() => <Dashboard user={this.state.user} />}/>
+       <Route path="/dashboard" component={() => <Dashboard user={this.state.user} setUser={this.setUser} />}/>
       </Switch>
     </Router>
     );

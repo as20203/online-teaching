@@ -30,20 +30,22 @@ class Login extends Component{
   }
   render(){
       return(
-        <Container>
-        <Header align="center" as="h1">Login</Header>
-          <Form onSubmit={this.onSubmit}>
-            <Form.Field>
-              <label>Username:</label>
-              <input required value={this.state.username} onChange={this.onChange} placeholder='Enter your username' name="username" />
-            </Form.Field>
-            <Form.Field>
-              <label>Password</label>
-              <input type="password" required value={this.state.password} onChange={this.onChange} placeholder='Enter your password' name="password" />
-            </Form.Field>
-            <Button className="loginButton" color="blue" type='submit'>Login</Button>
-          </Form>
-        </Container> 
+        <div style={{margin:'200px auto'}}>
+          <Container>
+          <Header align="center" as="h1">Login</Header>
+            <Form onSubmit={this.onSubmit}>
+              <Form.Field>
+                <label>Username:</label>
+                <input required value={this.state.username} onChange={this.onChange} placeholder='Enter your username' name="username" />
+              </Form.Field>
+              <Form.Field>
+                <label>Password</label>
+                <input type="password" required value={this.state.password} onChange={this.onChange} placeholder='Enter your password' name="password" />
+              </Form.Field>
+              <Button className="loginButton" color="blue" type='submit'>Login</Button>
+            </Form>
+          </Container> 
+        </div>
       )
   }
 }

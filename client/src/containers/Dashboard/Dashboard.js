@@ -6,6 +6,8 @@ import Student from './StudentDashboard/StudentDashboard';
 class Dashboard extends Component{ 
   logoutHandler = () =>{
     localStorage.clear();
+    this.props.setUser(null);
+
   }
 
   render(){
