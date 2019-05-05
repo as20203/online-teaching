@@ -9,6 +9,7 @@ class StudentDashboard extends Component{
     componentDidMount(){
         history.push("/dashboard/lessons");
     }
+   
     state = { visible: false };
 
     handleHideClick = () => this.setState({ visible: false });

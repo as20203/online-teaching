@@ -43,9 +43,8 @@ class Profile extends Component{
         this.getUserData();
      }
  
-     componentWillUnmount() {
+    componentWillUnmount() {
          this._isMounted = false;
- 
     }
     fileSelectHandler = (event) =>{
         console.log(event.target.files[0]);

@@ -3,6 +3,7 @@ import {Table} from 'semantic-ui-react';
 import axios from "axios";
 
 class Lessons extends Component {
+    _isMounted = false;
     constructor(props) {
         super(props);
         this.state = {
@@ -10,16 +11,23 @@ class Lessons extends Component {
         }
     }
     componentDidMount = () => {
+        this._isMounted = true;
         axios.get("/api/lesson")
             .then(result => {
                 if(result.status === 200){
-                    this.setState({lessons: result.data.lessons});
+                    if(this._isMounted){
+                        this.setState({lessons: result.data.lessons});
+                    }
+                    
                 }
             })
             .catch(err=>{
                 console.log(err);
             })
     };
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
     render = () => {
         const {lessons} = this.state;
         const LessonRows = lessons.map((lesson, index) => {
