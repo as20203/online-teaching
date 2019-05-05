@@ -1,0 +1,11 @@
+.ui.header, .ui.menu .item {
+    font-family: 'Poppins';
+}
+
+.ui.icon.header.homepage-header .content {
+    color: green;
+}
+
+.ui.header.homepage-sub-header {
+    color: darkgreen;
+}
