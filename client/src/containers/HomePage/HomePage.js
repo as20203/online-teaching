@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './HomePage.css'
-import {Header, Icon, Divider, Grid, Image} from 'semantic-ui-react';
+import {Header, Icon, Divider, Grid} from 'semantic-ui-react';
 
 class HomePage extends Component{
     render(){
@@ -8,7 +8,7 @@ class HomePage extends Component{
             <div>
                 <Header className='homepage-header' as='h2' icon textAlign='center'>
                     <Icon name='graduation' circular />
-                    <Header.Content>Dunhill School System</Header.Content>
+                    <Header.Content>School System</Header.Content>
                 </Header>
 
                 <Header className='homepage-sub-header' textAlign='center'>
@@ -26,21 +26,18 @@ class HomePage extends Component{
                                 <Icon name='building' circular />
                                 <Header.Content>Campus Life</Header.Content>
                             </Header>
-                            {/*<Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' />*/}
                         </Grid.Column>
                         <Grid.Column>
                             <Header as='h2' icon textAlign='center'>
                                 <Icon name='certificate' circular />
                                 <Header.Content>Admissions</Header.Content>
                             </Header>
-                            {/*<Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' />*/}
                         </Grid.Column>
                         <Grid.Column>
                             <Header as='h2' icon textAlign='center'>
                                 <Icon name='flag checkered' circular />
                                 <Header.Content>Athletics</Header.Content>
                             </Header>
-                            {/*<Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' />*/}
                         </Grid.Column>
                     </Grid.Row>
 
@@ -50,21 +47,18 @@ class HomePage extends Component{
                                 <Icon name='newspaper' circular />
                                 <Header.Content>News & Events</Header.Content>
                             </Header>
-                            {/*<Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' />*/}
                         </Grid.Column>
                         <Grid.Column>
                             <Header as='h2' icon textAlign='center'>
                                 <Icon name='phone' circular />
                                 <Header.Content>Contact Us</Header.Content>
                             </Header>
-                            {/*<Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' />*/}
                         </Grid.Column>
                         <Grid.Column>
                             <Header as='h2' icon textAlign='center'>
                                 <Icon name='user' circular />
                                 <Header.Content>Parents</Header.Content>
                             </Header>
-                            {/*<Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' />*/}
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>

@@ -1,12 +1,13 @@
 import React,{Component} from 'react';
-import { Button,Form,Container, Header } from 'semantic-ui-react';
+import { Button,Form,Container, Header, Message } from 'semantic-ui-react';
 import axios from 'axios';
-import history from '../../history';
 
 class CreateLesson extends Component{
     state = {
         lessonName: '',
-        description: ''
+        description: '',
+        lessonFile:null,
+        error: null
     };
     onChange = (e) =>{
         this.setState({
@@ -15,21 +16,38 @@ class CreateLesson extends Component{
     };
     onSubmit = (e) =>{
         e.preventDefault();
-        const lesson = this.state;
-        axios.post("/api/lesson", lesson)
+        const fd = new FormData();
+        fd.append("lessonName",this.state.lessonName);
+        fd.append("description",this.state.description);
+        fd.append('lessonFile',this.state.lessonFile,this.state.lessonFile.name);
+        console.log(fd.get('lessonFile'));
+        axios.post("/api/lesson",fd)
             .then(result => {
+                console.log(result);
                 if(result.status === 200){
-                    this.setState({lessonName: '', description: ''});
+                    this.setState({lessonName: '', description: '',error:null,lessonFile:null});
                 }
             })
             .catch(err=>{
-                console.log(err);
+                const error = err.response.data.message;
+                this.setState({error : error})
             })
-    };
+    };  
+
+    fileSelectHandler = (event) =>{
+        this.setState({lessonFile:event.target.files[0]})
+    }
     render(){
+        let message = null;
+        if(this.state.error){
+            message = <Message negative>
+                        <Message.Header>{this.state.error}</Message.Header>
+                    </Message>
+        }
         return(
             <div style={{margin:'200px auto'}}>
                 <Container>
+                    {message}
                     <Header align="center" as="h1">Create a Lesson</Header>
                     <Form onSubmit={this.onSubmit}>
                         <Form.Field>
@@ -42,7 +60,7 @@ class CreateLesson extends Component{
                         </Form.Field>
                         <Form.Field>
                             <label>File:</label>
-                            <input type="file" onChange={this.onChange} name="lessonFile" />
+                            <input type="file" required onChange={this.fileSelectHandler}  name="lessonFile" />
                         </Form.Field>
                         <Button className="loginButton" color="blue" type='submit'>Create</Button>
                     </Form>

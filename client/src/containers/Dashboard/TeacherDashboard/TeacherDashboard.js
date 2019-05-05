@@ -4,8 +4,11 @@ import {Link,Switch,Route} from 'react-router-dom'
 import Profile from '../../Profile/Profile'
 import './TeacherDashboard.css';
 import CreateLesson from '../../Lesson/CreateLesson';
-
+import history from '../../../history';
 class TeacherDashboard extends Component{
+    componentDidMount(){
+        history.push("/dashboard/create-lesson");
+    }
     state = { visible: false };
 
     handleHideClick = () => this.setState({ visible: false });
@@ -15,7 +18,7 @@ class TeacherDashboard extends Component{
     render() {
         const { visible } = this.state;
         return (
-            <div>
+            <div> 
                 <Button secondary={true} style={{margin:'5px',padding:'15px'}} icon disabled={visible}  onClick={this.handleShowClick}>
                     <Icon name='bars' />
                 </Button>

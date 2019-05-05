@@ -34,7 +34,7 @@ module.exports = (db) =>{
     });
 
     router.post("/api/signup",async(req,res)=>{
-        const {userType,password,username,Name,age,address} = req.body;
+        const {userType,password,username,Name,age,address,gender} = req.body;
         const salt = bcrypt.genSaltSync(parseInt(process.env.SALT_ROUNDS));
         const hash = await bcrypt.hashSync(password, salt);
         
@@ -44,7 +44,8 @@ module.exports = (db) =>{
             name:Name,
             age:age,
             userType:userType,
-            address:address
+            address:address,
+            gender:gender
         });
 
         if(created){

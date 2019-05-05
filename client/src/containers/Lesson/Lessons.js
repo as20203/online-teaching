@@ -24,11 +24,11 @@ class Lessons extends Component {
         const {lessons} = this.state;
         const LessonRows = lessons.map((lesson, index) => {
             return (
-                <Table.Row>
+                <Table.Row key={lesson.lessonId}>
                     <Table.Cell>{lesson.lessonName}</Table.Cell>
                     <Table.Cell>{lesson.description}</Table.Cell>
                     <Table.Cell>{lesson.Teacher ? lesson.Teacher.User.name : "No Teacher"}</Table.Cell>
-                    <Table.Cell>File Placeholder</Table.Cell>
+                    <Table.Cell><a target="_blank" rel="noopener noreferrer" href={lesson.lessonFile}>{lesson.lessonName}</a></Table.Cell>
                 </Table.Row>
             )
         });

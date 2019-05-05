@@ -1,8 +1,7 @@
 const express = require("express");
-const bcrypt = require("bcrypt-nodejs");
 const router = express.Router();
-const jwt   = require("jsonwebtoken");
 const verifyToken = require("../middleware/verify-token");
+const upload  = require("../middleware/verify-lesson");
 
 module.exports = (db) =>{
     const {student, teacher, user, lesson} = db;
@@ -21,14 +20,19 @@ module.exports = (db) =>{
         }
     });
 
-    router.post("/api/lesson", verifyToken, async (req, res) => {
+    router.post("/api/lesson",verifyToken,upload.single('lessonFile') , async (req, res) => {
+        if(req.error){
+            return res.status(402).json({
+                message:req.error
+            })
+        }
         const {lessonName, description} = req.body;
         if (!req.user || (req.user && req.user.userType !== "teacher")) {
             res.status(402).json({message: "You are not authorized to create a lesson."});
         } else {
             const foundTeacher = await teacher.findOne({where: {userId: req.user.userId}});
             if (teacher) {
-                const created = await lesson.create({lessonName, description, teacherId: foundTeacher.teacherId});
+                const created = await lesson.create({lessonName, description,lessonFile:"http://localhost:5000/"+req.file.path ,teacherId: foundTeacher.teacherId});
                 if (created) {
                     res.status(200).json({created, message: "Lesson created."})
                 } else {

@@ -35,6 +35,19 @@ const gradeOptions = [
         value:'10th'
     }
 ]
+
+const genderOptions = [
+    {
+        key:1,
+        text:'M',
+        value:'M'
+    },
+    {
+        key:2,
+        text:'F',
+        value:'F'
+    },
+]
 class teacherSignup extends Component{
     state = {
         Name: '',
@@ -43,14 +56,15 @@ class teacherSignup extends Component{
         username:'',
         password:'',
         address:'',
-        userType:'student'
+        userType:'student',
+        gender:''
     }
     onSubmit = (e) =>{
         e.preventDefault();
         const student = this.state;
         axios.post("/api/signup",student)
         .then(result=>{
-            history.push("/landing/login");
+            history.push("/login");
         })
         .catch(err=>{
             console.log(err);
@@ -64,6 +78,11 @@ class teacherSignup extends Component{
     gradeChangeHandler = (event,data) =>{
         this.setState({
             grade:data.value
+        })
+    }
+    genderChangeHandler = (event,data) =>{
+        this.setState({
+            gender:data.value
         })
     }
     render(){
@@ -88,6 +107,10 @@ class teacherSignup extends Component{
                     <Form.Field required>
                         <label> Grade:</label>
                         <Dropdown required placeholder='Select Grade' fluid selection options={gradeOptions} onChange={this.gradeChangeHandler}/>
+                    </Form.Field>
+                    <Form.Field required>
+                        <label> Gender:</label>
+                        <Dropdown  required placeholder='Select Gender' fluid selection options={genderOptions} onChange={this.genderChangeHandler}/>
                     </Form.Field>
                     <Form.Field>
                         <label> Address</label>

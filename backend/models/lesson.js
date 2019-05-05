@@ -14,6 +14,9 @@ module.exports = sequelize => {
         description: {
             type: Sequelize.STRING,
             allowNull: false,
+        },
+        lessonFile:{
+            type: Sequelize.STRING
         }
     });
 

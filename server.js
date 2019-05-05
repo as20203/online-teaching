@@ -7,9 +7,11 @@ const Sequelize = require('sequelize');
 
 //SEED DATA
 const SeedUsers = require("./backend/seed/SeedUsers");
+app.use('/lessons',express.static('lessons'));
+app.use('/profile',express.static('profile'))
 
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const sequelize = new Sequelize('teaching', 'root', 'root', {
   host: 'localhost',

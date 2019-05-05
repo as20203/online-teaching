@@ -35,7 +35,12 @@ module.exports = sequelize => {
         },
         gender:{
             type:Sequelize.STRING,
-            allowNull:false
+            allowNull:false,
+            
+        },
+        userImage:{
+            type:Sequelize.STRING,
+            defaultValue:'http://localhost:5000/profile/square-image.png' 
         }
     });
 

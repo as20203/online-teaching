@@ -4,8 +4,11 @@ import {Link,Switch,Route} from 'react-router-dom';
 import './StudentDashboard.css';
 import Profile from '../../Profile/Profile';
 import Lessons from '../../Lesson/Lessons';
-
+import history from '../../../history';
 class StudentDashboard extends Component{
+    componentDidMount(){
+        history.push("/dashboard/lessons");
+    }
     state = { visible: false };
 
     handleHideClick = () => this.setState({ visible: false });
