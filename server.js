@@ -11,20 +11,22 @@ const SeedUsers = require("./backend/seed/SeedUsers");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const sequelize = new Sequelize('teaching', 'root', 'root', {
+const sequelize = new Sequelize('teaching', 'root', '1234', {
   host: 'localhost',
   dialect: 'mysql'
 });
 
 const db = {
-  user:   sequelize.import("./backend/models/user"),
+  user: sequelize.import("./backend/models/user"),
   teacher: sequelize.import("./backend/models/teacher"),
-  student:sequelize.import("./backend/models/student"),
+  student: sequelize.import("./backend/models/student"),
+  lesson: sequelize.import("./backend/models/lesson"),
 };
 
 //Routes
 const authRoutes = require("./backend/routes/auth")(db);
 const generalRoutes = require("./backend/routes/general")(db);
+const lessonRoutes = require("./backend/routes/lesson")(db);
  
 Object.keys(db).forEach((model) => {
   if ('associate' in db[model]) {
@@ -37,9 +39,10 @@ sequelize.sync({
 })
 .then(()=>{
   SeedUsers(db);
-})
+});
 
 app.use(authRoutes);
 app.use(generalRoutes);
+app.use(lessonRoutes);
 
 server.listen(port, () => console.log(`Listening on port ${port}`));

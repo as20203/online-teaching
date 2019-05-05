@@ -7,8 +7,7 @@ class Dashboard extends Component{
   logoutHandler = () =>{
     localStorage.clear();
     this.props.setUser(null);
-
-  }
+  };
 
   render(){
     const {user} = this.props;

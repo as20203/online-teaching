@@ -7,15 +7,15 @@ class Login extends Component{
   state = {
     username:'',
     password:''
-  }
+  };
   onChange = (e) =>{
     this.setState({
       [e.target.name]:e.target.value
     })
-  }
+  };
   onSubmit = (e) =>{
     e.preventDefault();
-    const credentials = this.state
+    const credentials = this.state;
     axios.post("/api/login",credentials)
     .then(result=>{
       if(result.data.status===200){
@@ -27,7 +27,7 @@ class Login extends Component{
     .catch(err=>{
       console.log(err);
     })
-  }
+  };
   render(){
       return(
         <div style={{margin:'200px auto'}}>
@@ -49,4 +49,5 @@ class Login extends Component{
       )
   }
 }
+
 export default Login;

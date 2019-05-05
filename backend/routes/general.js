@@ -5,7 +5,6 @@ module.exports = (db) =>{
     const {student,teacher,user} = db; 
     
     router.get("/api/user",verifyToken,async(req,res)=>{
-        console.log(req.user);
         const verifyUser = req.user;
         //return res.json({status:200,message:"hello from route"});
         const profileUser = await user.findOne({where:{userId:verifyUser.userId}});

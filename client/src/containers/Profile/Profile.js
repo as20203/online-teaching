@@ -11,37 +11,36 @@ class Profile extends Component{
         gender:'',
         address:'',
         userType:'',
-    }
+    };
     
     componentDidMount=async()=>{
-       const user = await axios.get("/api/user")
+       const user = await axios.get("/api/user");
        if(user){
-           console.log(user);
-           if(user.data.userType==="teacher"){
-                const {name,age,gender,degree,address} = user.data.teacher;
+           if (user.data.userType==="teacher") {
+                const {name, age, gender, degree, address} = user.data.teacher;
                 this.setState({
-                    name,age,gender,specificInfo:degree,address,userType:user.data.userType
+                    name, age, gender, specificInfo:degree, address, userType: user.data.userType
                 })
-           }else{
-                const {name,age,gender,grade,address} = user.data.student;
+           } else {
+                const {name, age, gender, grade, address} = user.data.student;
                 this.setState({
-                name,age,gender,specificInfo:grade,address,userType:user.data.userType
+                    name, age, gender, specificInfo: grade, address, userType: user.data.userType
                 })
            }
-       }else{
+       } else {
            console.log("Couldn't find user");
        }
-    }
+    };
     
     render(){
         let userSpecHeader = null;
-        if(this.state.userType==="student"){
+        if (this.state.userType==="student") {
             userSpecHeader=  <Header as="h1" textAlign="left">Grade:</Header>
         }
-        else if(this.state.userType==="teacher"){
+        else if (this.state.userType==="teacher") {
             userSpecHeader =<Header as="h1" textAlign="left">Degree:</Header>
         }
-        return(
+        return (
           <Container>
               <Segment style={{background:"#F7F7F7"}} raised color="teal">
               <Header as="h2" textAlign="center">Profile</Header>

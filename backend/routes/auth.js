@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt-nodejs");
 const router = express.Router();
 const jwt   = require("jsonwebtoken");
 const verifyToken = require("../middleware/verify-token");
+
 module.exports = (db) =>{
     const {student,teacher,user} = db; 
     router.post("/api/login", async (req, res) => {
@@ -33,7 +34,6 @@ module.exports = (db) =>{
     });
 
     router.post("/api/signup",async(req,res)=>{
-        console.log(req.body);
         const {userType,password,username,Name,age,address} = req.body;
         const salt = bcrypt.genSaltSync(parseInt(process.env.SALT_ROUNDS));
         const hash = await bcrypt.hashSync(password, salt);
