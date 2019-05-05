@@ -4,11 +4,7 @@ import {Link,Switch,Route} from 'react-router-dom'
 import Profile from '../../Profile/Profile'
 import './TeacherDashboard.css';
 import CreateLesson from '../../Lesson/CreateLesson';
-import history from '../../../history';
 class TeacherDashboard extends Component{
-    componentDidMount(){
-        history.push("/dashboard/create-lesson");
-    }
     state = { visible: false };
 
     handleHideClick = () => this.setState({ visible: false });
@@ -51,8 +47,9 @@ class TeacherDashboard extends Component{
                 <Sidebar.Pusher dimmed={visible}>
                     <Segment basic>
                         <Switch>
-                            <Route exact path="/dashboard/profile" component={Profile} />
-                            <Route exact path="/dashboard/create-lesson" component={CreateLesson} />
+                            <Route exact path="/dashboard" component={CreateLesson} />
+                            <Route  path="/dashboard/profile" component={Profile} />
+                            <Route  path="/dashboard/create-lesson" component={CreateLesson} />
                         </Switch>
                     </Segment>
                 </Sidebar.Pusher>
