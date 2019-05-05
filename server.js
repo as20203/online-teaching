@@ -11,7 +11,7 @@ const SeedUsers = require("./backend/seed/SeedUsers");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const sequelize = new Sequelize('teaching', 'root', '1234', {
+const sequelize = new Sequelize('teaching', 'root', 'root', {
   host: 'localhost',
   dialect: 'mysql'
 });

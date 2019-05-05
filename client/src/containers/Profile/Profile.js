@@ -4,6 +4,7 @@ import './Profile.css';
 import axios from 'axios';
 
 class Profile extends Component{
+    _isMounted = false;
     state={
         name:'',
         age:'',
@@ -14,23 +15,35 @@ class Profile extends Component{
     };
     
     componentDidMount=async()=>{
-       const user = await axios.get("/api/user");
-       if(user){
-           if (user.data.userType==="teacher") {
-                const {name, age, gender, degree, address} = user.data.teacher;
-                this.setState({
-                    name, age, gender, specificInfo:degree, address, userType: user.data.userType
-                })
-           } else {
-                const {name, age, gender, grade, address} = user.data.student;
-                this.setState({
-                    name, age, gender, specificInfo: grade, address, userType: user.data.userType
-                })
-           }
-       } else {
-           console.log("Couldn't find user");
-       }
-    };
+        this._isMounted=true
+        const user = await axios.get("/api/user");
+        if(user.data.status===200){
+            if (user.data.userType==="teacher") {
+                 const {name, age, gender, degree, address} = user.data.teacher;
+                 if(this._isMounted){
+                    this.setState({
+                        name, age, gender, specificInfo:degree, address, userType: user.data.userType
+                    })
+                 }
+                
+            } else {
+                 const {name, age, gender, grade, address} = user.data.student;
+                 if(this._isMounted){
+                    this.setState({
+                        name, age, gender, specificInfo: grade, address, userType: user.data.userType
+                    })
+                 }
+                 
+            }
+        } else {
+            console.log("Couldn't find user");
+        }
+     }
+ 
+     componentWillUnmount() {
+         this._isMounted = false;
+ 
+     }    
     
     render(){
         let userSpecHeader = null;

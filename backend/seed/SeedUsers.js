@@ -2,69 +2,69 @@ const bcrypt = require('bcrypt-nodejs');
 
 module.exports = async (db) =>{
 const {user,student,teacher, lesson} = db;
-let data = [
-    { 
-    name:"AS20203",
-    username: 'as20203',
-    password: '123',
-    grade:'5th',
-    userType:'student',
-    age:18,
-    address:'House No 586, Street 22, Rwp',
-    gender:'M'
-    },
-    {  
-    name:"JAWAD",
-    username: 'jawad',
-    password: '123',
-    userType: "teacher",
-    degree:'BE-SE',
-    age:22,
-    address:'House No 452, Street 21, Isb',
-    gender:'M'
-    },
-    {
-    name:"ALI",
-    username: 'ali',
-    password: '123',
-    userType: "student",
-    age:28,
-    address:'House No 458, Street 21, Lhr',
-    grade:'7th',
-    gender:'M'
+// let data = [
+//     { 
+//     name:"AS20203",
+//     username: 'as20203',
+//     password: '123',
+//     grade:'5th',
+//     userType:'student',
+//     age:18,
+//     address:'House No 586, Street 22, Rwp',
+//     gender:'M'
+//     },
+//     {  
+//     name:"JAWAD",
+//     username: 'jawad',
+//     password: '123',
+//     userType: "teacher",
+//     degree:'BE-SE',
+//     age:22,
+//     address:'House No 452, Street 21, Isb',
+//     gender:'M'
+//     },
+//     {
+//     name:"ALI",
+//     username: 'ali',
+//     password: '123',
+//     userType: "student",
+//     age:28,
+//     address:'House No 458, Street 21, Lhr',
+//     grade:'7th',
+//     gender:'M'
 
-    },
-    {
-    name:"Noshi",
-    username: 'noshi',
-    password: '123',
-    userType: "teacher",
-    degree:'BS-CS',
-    age:22,
-    address:'F-10 Markaz, ISB',
-    gender:'M'
-    },
-    { 
-    name:"Usman",
-    username: 'usman',
-    password: '123',
-    userType: "student",
-    age:28,
-    address:'House No 472, Street 21, Lhr',
-    grade:'10th',
-    gender:'M'
-    },
-    {
-    name:"Kashif",
-    username: 'kashif',
-    password: '123',
-    userType: "teacher",
-    degree:'BS-CS',
-    age:25,
-    address:'F-7 Markaz, ISB',
-    gender:'M'
-    }
-];
+//     },
+//     {
+//     name:"Noshi",
+//     username: 'noshi',
+//     password: '123',
+//     userType: "teacher",
+//     degree:'BS-CS',
+//     age:22,
+//     address:'F-10 Markaz, ISB',
+//     gender:'M'
+//     },
+//     { 
+//     name:"Usman",
+//     username: 'usman',
+//     password: '123',
+//     userType: "student",
+//     age:28,
+//     address:'House No 472, Street 21, Lhr',
+//     grade:'10th',
+//     gender:'M'
+//     },
+//     {
+//     name:"Kashif",
+//     username: 'kashif',
+//     password: '123',
+//     userType: "teacher",
+//     degree:'BS-CS',
+//     age:25,
+//     address:'F-7 Markaz, ISB',
+//     gender:'M'
+//     }
+// ];
     
 
 // data.forEach(async (seed)=>{
@@ -88,13 +88,16 @@ let data = [
 //     }
 // })
 
+const salt = bcrypt.genSaltSync(parseInt(process.env.SALT_ROUNDS));
+const hash = bcrypt.hashSync('123', salt);
+
     await user.bulkCreate([
-        { userId: 1, name:"AS20203", username: 'as20203', password: '123', age:25, address:'F-7 Markaz, ISB', gender:'M', userType: "student", },
-        { userId: 2, name:"JAWAD", username: 'jawad', password: '123', age:25, address:'F-7 Markaz, ISB', gender:'M', userType: "teacher", },
-        { userId: 3, name:"ALI", username: 'ali', password: '123', userType: "student", age:28, address:'House No 458, Street 21, Lhr', gender:'M' },
-        { userId: 4, name:"Kashif", username: 'kashif', password: '123',age:25, address:'F-7 Markaz, ISB', gender:'M', userType: "teacher", },
-        { userId: 5, name:"Usman", username: 'usman', password: '123', userType: "student", age:28, address:'House No 472, Street 21, Lhr', gender:'M' },
-        { userId: 6, name:"Noshi", username: 'noshi', password: '123', userType: "teacher", age:22, address:'F-10 Markaz, ISB', gender:'M' }
+        { userId: 1, name:"AS20203", username: 'as20203', password: hash, age:25, address:'F-7 Markaz, ISB', gender:'M', userType: "student", },
+        { userId: 2, name:"JAWAD", username: 'jawad', password: hash, age:25, address:'F-7 Markaz, ISB', gender:'M', userType: "teacher", },
+        { userId: 3, name:"ALI", username: 'ali', password: hash, userType: "student", age:28, address:'House No 458, Street 21, Lhr', gender:'M' },
+        { userId: 4, name:"Kashif", username: 'kashif', password: hash,age:25, address:'F-7 Markaz, ISB', gender:'M', userType: "teacher", },
+        { userId: 5, name:"Usman", username: 'usman', password: hash, userType: "student", age:28, address:'House No 472, Street 21, Lhr', gender:'M' },
+        { userId: 6, name:"Noshi", username: 'noshi', password: hash, userType: "teacher", age:22, address:'F-10 Markaz, ISB', gender:'M' }
     ]);
 
     await teacher.bulkCreate([
